@@ -15,3 +15,10 @@ jobs:
       - run: chmod 500 bin/kms.sh
       - run: bin/kms.sh d
       - run: bin/deploy.sh
+
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - build:
+          context: GCP

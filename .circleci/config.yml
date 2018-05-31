@@ -10,4 +10,5 @@ jobs:
       - run: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
       - run: echo $PROJECT_ID
       - run: gcloud config set project $PROJECT_ID
+      - run: chmod 777 bin/deploy.sh
       - run: bin/deploy.sh

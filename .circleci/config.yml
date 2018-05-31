@@ -6,6 +6,7 @@ jobs:
     steps:
       - checkout
       - run: echo $ACCT_AUTH | base64 -d > ${HOME}/gcloud-service-key.json
+      - run: cat  ${HOME}/gcloud-service-key.json
       - run: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
       - run: gcloud config set project $PROJECT_ID
       - run: bin/deploy.sh

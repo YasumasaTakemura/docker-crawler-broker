@@ -1,0 +1,8 @@
+.python-version
+.pytest_cache/
+#.tests/
+*.log
+*.env
+nginx/ssl/*.crt$
+nginx/ssl/*.key$
+nginx/ssl/*.csr$

@@ -1,0 +1,25 @@
+version: "3.2"
+
+services:
+  nginx:
+    image: nginx:NGINX_VERSION
+    volumes:
+      - "tmp:/tmp"
+      - "$PWD/nginx/conf.d:/etc/nginx/conf.d"
+    ports:
+      - "8080:8080"
+      - "80:80"
+    logging:
+      driver: LOGGING
+
+  api:
+    image: SOURCE_IMAGE:ENV
+    env_file:
+     - "$PWD/env/.env"
+    volumes:
+      - "tmp:/tmp"
+    logging:
+      driver: LOGGING
+
+volumes:
+  tmp:

@@ -7,17 +7,16 @@ jobs:
       - pyenv global 2.7.12
     steps:
       - checkout
-      - run: echo $ACCT_AUTH | base64 -d > ${HOME}/gcloud-service-key.json
-      - run: cat  ${HOME}/gcloud-service-key.json
-      - run: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-      - run: echo $PROJECT_ID
-      - run: gcloud config set project $PROJECT_ID
-      - run: ls -al bin/
-      - run: ls -al env/
-      - run: chmod 500 bin/deploy.sh
-      - run: chmod 500 bin/kms.sh
-      - run: bin/kms.sh d
-#      - run: bin/deploy.sh
+      - run:
+        name: deploy app
+        command: |
+          echo $ACCT_AUTH | base64 -d > ${HOME}/gcloud-service-key.json
+          gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+          gcloud config set project $PROJECT_ID
+          chmod 500 bin/deploy.sh
+          chmod 500 bin/kms.sh
+          bin/kms.sh d && \
+          bin/deploy.sh
 
 workflows:
   version: 2

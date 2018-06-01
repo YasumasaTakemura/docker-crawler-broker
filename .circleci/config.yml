@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: google/cloud-sdk:latest
+    pre:
+      - pyenv global 2.7.12
     steps:
       - checkout
       - run: echo $ACCT_AUTH | base64 -d > ${HOME}/gcloud-service-key.json

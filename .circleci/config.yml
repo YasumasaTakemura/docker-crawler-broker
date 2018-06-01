@@ -8,15 +8,15 @@ jobs:
     steps:
       - checkout
       - run:
-        name: deploy app
-        command: |
-          echo $ACCT_AUTH | base64 -d > ${HOME}/gcloud-service-key.json
-          gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
-          gcloud config set project $PROJECT_ID
-          chmod 500 bin/deploy.sh
-          chmod 500 bin/kms.sh
-          bin/kms.sh d && \
-          bin/deploy.sh
+            name: deploy app
+            command: |
+                echo $ACCT_AUTH | base64 -d > ${HOME}/gcloud-service-key.json
+                gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+                gcloud config set project $PROJECT_ID
+                chmod 500 bin/deploy.sh
+                chmod 500 bin/kms.sh
+                bin/kms.sh d && \
+                bin/deploy.sh
 
 workflows:
   version: 2
